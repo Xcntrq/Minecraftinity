@@ -1,16 +1,20 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Random;
 
 [DisallowMultipleComponent]
 public class WorldGen : MonoBehaviour
 {
-    [SerializeField] private int _width;
+    [SerializeField] private int _radius;
     [SerializeField] private int _height;
     [SerializeField] private float _scale;
     [SerializeField] private Grass _grass;
     [SerializeField] private TreeGen _treeGen;
     [SerializeField] private float _treeChance;
+
+    public event Action OnWorldGenerated;
 
     public void Generate(bool isInEditor)
     {
@@ -29,33 +33,40 @@ public class WorldGen : MonoBehaviour
         grass.parent = transform;
         trees.parent = transform;
 
-        for (int x = -_width; x <= _width; x++)
+        for (int x = -_radius; x <= _radius; x++)
         {
-            for (int z = -_width; z <= _width; z++)
+            for (int z = -_radius; z <= _radius; z++)
             {
-                float xf = Mathf.InverseLerp(-_width, _width, x) * _scale;
+                if (x * x + z * z >= _radius * _radius) continue;
+
+                float xf = Mathf.InverseLerp(-_radius, _radius, x) * _scale;
                 xf -= (int)xf;
 
-                float zf = Mathf.InverseLerp(-_width, _width, z) * _scale;
+                float zf = Mathf.InverseLerp(-_radius, _radius, z) * _scale;
                 zf -= (int)zf;
 
                 float perlin = Mathf.PerlinNoise(xf, zf);
                 float yf = Mathf.Lerp(0, _height, perlin);
-                int maxY = (int)yf;
+                int perlinY = (int)yf;
 
-                for (int y = maxY; y <= maxY; y++)
+                float distanceFromCenter = Mathf.Sqrt(x * x + z * z);
+                int circleY = _radius - (int)distanceFromCenter - 1;
+
+                int actualY = Mathf.Min(perlinY, circleY);
+
+                for (int y = actualY; y <= actualY; y++)
                 {
                     Transform go = CreateBlock(_grass, grass, isInEditor);
                     go.localPosition = new Vector3(x, y, z);
                 }
 
-                bool treeChance = Random.Range(0f, 1f) < _treeChance;
+                bool isTreeProcced = Range(0f, 1f) < _treeChance;
 
-                if (treeChance)
+                if (isTreeProcced)
                 {
                     Transform go = CreateBlock(_treeGen, trees, isInEditor);
-                    go.localPosition = new Vector3(x, maxY, z);
-                    go.GetComponent<TreeGen>().Generate(isInEditor);
+                    go.localPosition = new Vector3(x, actualY, z);
+                    go.GetComponent<TreeGen>().Generate(this, isInEditor);
                 }
             }
         }
@@ -72,5 +83,10 @@ public class WorldGen : MonoBehaviour
 #endif
 
         return Instantiate(moBe, transform).transform;
+    }
+
+    private void Start()
+    {
+        OnWorldGenerated?.Invoke();
     }
 }

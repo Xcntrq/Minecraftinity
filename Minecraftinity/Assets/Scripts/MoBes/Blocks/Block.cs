@@ -6,6 +6,8 @@ public class Block : MonoBehaviour
     [SerializeField] private float _sideForceDelta;
     [SerializeField] private Collider _trigger;
 
+    public bool IsChopped => !GetComponent<Rigidbody>().isKinematic;
+
     public void GetChopped()
     {
         Rigidbody rb = GetComponent<Rigidbody>();

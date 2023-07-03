@@ -151,6 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d61800b1e11064a92aaab70b1a4855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _worldGen: {fileID: 0}
+  _logRange: 3
+  _logCheckDelay: 5
+  _deathDealyMin: 3
+  _deathDealyMax: 12
+  _nearbyLogs: []
 --- !u!54 &4265633511669632629
 Rigidbody:
   m_ObjectHideFlags: 0

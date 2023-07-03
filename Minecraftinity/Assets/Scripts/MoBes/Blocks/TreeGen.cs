@@ -8,7 +8,7 @@ public class TreeGen : MonoBehaviour
     [SerializeField] private Log _log;
     [SerializeField] private Leaf _leaf;
 
-    public void Generate(bool isInEditor)
+    public void Generate(WorldGen worldGen, bool isInEditor)
     {
         Transform[] children = transform.GetComponentsInChildren<Transform>();
 
@@ -58,6 +58,7 @@ public class TreeGen : MonoBehaviour
                     {
                         Transform go = CreateBlock(_leaf, isInEditor);
                         go.localPosition = new Vector3(x, y, z);
+                        go.GetComponent<Leaf>().SetWorldGen(worldGen);
                     }
                 }
             }

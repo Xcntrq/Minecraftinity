@@ -12,7 +12,8 @@ public class TreeGenEditor : Editor
 
         if (GUILayout.Button("Regenerate"))
         {
-            treeGen.Generate(true);
+            WorldGen worldGen = FindObjectOfType<WorldGen>();
+            treeGen.Generate(worldGen, true);
         }
     }
 }
