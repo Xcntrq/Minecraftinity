@@ -8,11 +8,27 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float _pullSpeed;
     [SerializeField] private int _logCount;
 
+    public int LogCount
+    {
+        get => _logCount;
+
+        private set
+        {
+            _logCount = value;
+            OnLogCountChanged?.Invoke(_logCount);
+        }
+    }
+
     public event Action<int> OnLogCountChanged;
+
+    public void TakeOneLog()
+    {
+        LogCount -= 1;
+    }
 
     private void Start()
     {
-        OnLogCountChanged?.Invoke(_logCount);
+        LogCount = 0;
     }
 
     private void OnTriggerStay(Collider other)
@@ -25,8 +41,7 @@ public class Inventory : MonoBehaviour
             float dist = Vector3.Distance(_face.position, rb.position);
             if (dist < _pickupDistance)
             {
-                _logCount++;
-                OnLogCountChanged?.Invoke(_logCount);
+                LogCount += 1;
                 Destroy(block.gameObject);
             }
         }
