@@ -39,9 +39,7 @@ public class ToolSelector : MonoBehaviour
             _keyCodeImagePairs[key] = _activeImage;
         }
 
-        EnableTool(KeyCode.Alpha1);
-
-        for (int i = 1; i < tools.Length; i++)
+        for (int i = 0; i < tools.Length; i++)
         {
             tools[i].Deactivate();
         }

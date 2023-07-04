@@ -51,6 +51,7 @@ public class WorldGen : MonoBehaviour
 
                 float distanceFromCenter = Mathf.Sqrt(x * x + z * z);
                 int circleY = _radius - (int)distanceFromCenter - 1;
+                circleY /= 3;
 
                 int actualY = Mathf.Min(perlinY, circleY);
 
@@ -60,9 +61,10 @@ public class WorldGen : MonoBehaviour
                     go.localPosition = new Vector3(x, y, z);
                 }
 
+                bool isCloseToCenter = (int)distanceFromCenter < (_radius - 5);
                 bool isTreeProcced = Range(0f, 1f) < _treeChance;
 
-                if (isTreeProcced)
+                if (isTreeProcced && isCloseToCenter)
                 {
                     Transform go = CreateBlock(_treeGen, trees, isInEditor);
                     go.localPosition = new Vector3(x, actualY, z);

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa576da2f3d01446aa5c7ff6cbc5847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainCollider: {fileID: 0}
+  _timeToBuild: 0.5
 --- !u!114 &6378752074678724193
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        LogCount = 0;
+        LogCount = _logCount;
     }
 
     private void OnTriggerStay(Collider other)
