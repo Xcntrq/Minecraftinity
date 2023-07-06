@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 486c795616074954385ae3db8ef3575b, type: 2}
+  - {fileID: 2100000, guid: af415a05e3b05ff4d97d525542439d92, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,6 +157,8 @@ MonoBehaviour:
   _deathDealyMin: 2
   _deathDealyMax: 8
   _nearbyLogs: []
+  _dissolveTime: 2
+  _renderer: {fileID: 5655254478766650732}
 --- !u!54 &4265633511669632629
 Rigidbody:
   m_ObjectHideFlags: 0

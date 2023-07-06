@@ -6,6 +6,7 @@ public class Log : MonoBehaviour
 {
     [SerializeField] private Collider _mainCollider;
     [SerializeField] private float _timeToBuild;
+    [SerializeField] private ParticleSystem _particles;
 
     public void GetPlaced(Log heldLog, Log placeholderLog)
     {
@@ -35,6 +36,11 @@ public class Log : MonoBehaviour
 
             yield return null;
         }
+
+        ParticleSystem ps = Instantiate(_particles);
+        ps.transform.position = placeholderLog.transform.position + placeholderLog.transform.up * 0.5f;
+        ps.transform.up = transform.up;
+        Destroy(ps.gameObject, 5f);
 
         Destroy(placeholderLog.gameObject);
         _mainCollider.enabled = true;

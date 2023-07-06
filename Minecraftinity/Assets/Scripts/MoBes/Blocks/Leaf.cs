@@ -1,3 +1,4 @@
+using AmazingAssets.AdvancedDissolve;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Leaf : MonoBehaviour
     [SerializeField] private float _deathDealyMin;
     [SerializeField] private float _deathDealyMax;
     [SerializeField] private List<Block> _nearbyLogs;
+    [SerializeField] private float _dissolveTime;
+    [SerializeField] private Renderer _renderer;
 
     public void SetWorldGen(WorldGen worldGen)
     {
@@ -102,6 +105,21 @@ public class Leaf : MonoBehaviour
     {
         float delay = Random.Range(_deathDealyMin, _deathDealyMax);
         yield return new WaitForSeconds(delay);
+
+        Material material = _renderer.material;
+
+        float timer = 0f;
+        float lerp = 0f;
+
+        while (lerp < 1f)
+        {
+            lerp = timer / _dissolveTime;
+            AdvancedDissolveProperties.Cutout.Standard.UpdateLocalProperty(material, AdvancedDissolveProperties.Cutout.Standard.Property.Clip, lerp);
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
         Destroy(gameObject);
     }
 }

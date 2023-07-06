@@ -3,7 +3,7 @@ Shader "Amazing Assets/Advanced Dissolve/Lit"
     Properties
     {
 //[HideInInspector][CurvedWorldBendSettings] _CurvedWorldBendSettings("0|1|1", Vector) = (0, 0, 0, 0)
-
+[ToggleUI] _CastShadows("Cast Shadows", Float) = 1.0
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0
 

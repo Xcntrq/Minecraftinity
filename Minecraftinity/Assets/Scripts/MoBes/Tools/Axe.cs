@@ -10,6 +10,7 @@ public class Axe : Tool
     [SerializeField] private float _shakeTime;
     [SerializeField] private float _shakeVelMin;
     [SerializeField] private float _shakeVelMax;
+    [SerializeField] private ParticleSystem _particleHit;
 
     private Camera _mainCamera;
 
@@ -22,6 +23,12 @@ public class Axe : Tool
         {
             block.GetChopped();
             //_cameraShaker.ShakeVCam(_shakeAmp, _shakeFreq, _shakeTime);
+
+            ParticleSystem ps = Instantiate(_particleHit);
+            Vector3 offset = hitInfo.point - hitInfo.collider.transform.position;
+            ps.transform.position = hitInfo.collider.transform.position + offset * 0.5f;
+            ps.transform.up = offset;
+            Destroy(ps.gameObject, 5f);
 
             Vector3 vel = Vector3.zero;
             vel.x = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);

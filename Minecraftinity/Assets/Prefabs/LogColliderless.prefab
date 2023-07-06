@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCollider: {fileID: 8833825373672810286}
   _timeToBuild: 0.3
+  _particles: {fileID: 6786926295669828074, guid: d2a1b92cded38db479ea64ef67ce86eb, type: 3}
 --- !u!114 &6378752074678724193
 MonoBehaviour:
   m_ObjectHideFlags: 0
