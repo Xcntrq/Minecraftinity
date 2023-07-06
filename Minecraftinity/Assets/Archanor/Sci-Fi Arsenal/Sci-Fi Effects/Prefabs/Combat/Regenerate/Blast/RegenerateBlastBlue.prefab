@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6786926295684226086}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
@@ -186,8 +186,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0.7921569, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.21568628, b: 1, a: 1}
+      minColor: {r: 0.87058824, g: 0.72156864, b: 0.5294118, a: 1}
+      maxColor: {r: 0.54509807, g: 0.27058825, b: 0.07450981, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4850,7 +4850,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6786926295684227094}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -9706,8 +9706,8 @@ Transform:
   m_GameObject: {fileID: 6786926295684264954}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6786926295684017958}
   - {fileID: 6786926295683982938}
@@ -9723,7 +9723,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6786926295684264954}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0

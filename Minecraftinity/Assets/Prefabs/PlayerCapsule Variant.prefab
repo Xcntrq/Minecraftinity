@@ -222,6 +222,7 @@ MonoBehaviour:
   _shakeTime: 0.2
   _shakeVelMin: 0.04
   _shakeVelMax: 0.06
+  _particleHit: {fileID: 19800000, guid: 979632a27455af442bd2d8f36eb0ffce, type: 3}
 --- !u!95 &7982230680067974525
 Animator:
   serializedVersion: 5
