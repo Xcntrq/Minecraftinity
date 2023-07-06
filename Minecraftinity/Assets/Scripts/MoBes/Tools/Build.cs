@@ -7,8 +7,33 @@ public class Build : Tool
     [SerializeField] private Log _logPlaceholder;
     [SerializeField] private float _buildDistance;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private GameObject _view;
 
     private Camera _mainCamera;
+
+    private void Awake()
+    {
+        _inventory.OnLogCountChanged += Inventory_OnLogCountChanged;
+    }
+
+    private void Inventory_OnLogCountChanged(int count)
+    {
+        if ((count == 0) && _view.activeSelf)
+        {
+            _view.SetActive(false);
+        }
+
+        if ((count != 0) && !_view.activeSelf)
+        {
+            _view.SetActive(true);
+            GetComponent<Animator>().SetTrigger("GetReady");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _inventory.OnLogCountChanged -= Inventory_OnLogCountChanged;
+    }
 
     private void Start()
     {

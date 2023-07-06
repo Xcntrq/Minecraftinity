@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7102939052735413010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -146,6 +146,7 @@ MonoBehaviour:
   _logPlaceholder: {fileID: 69378509335986109, guid: 7aa28daa05671e146ad6a1a0f29f3597, type: 3}
   _buildDistance: 6
   _inventory: {fileID: 6490466151716365704}
+  _view: {fileID: 658863289269094009}
 --- !u!95 &2859537186947616518
 Animator:
   serializedVersion: 5
@@ -178,6 +179,7 @@ GameObject:
   - component: {fileID: 1008211598554237335}
   - component: {fileID: 1330045651156814635}
   - component: {fileID: 7982230680067974525}
+  - component: {fileID: 8967529423278434926}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -214,6 +216,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitDistance: 4
+  _cameraShaker: {fileID: 0}
+  _shakeAmp: 2
+  _shakeFreq: 20
+  _shakeTime: 0.2
+  _shakeVelMin: 0.04
+  _shakeVelMax: 0.06
 --- !u!95 &7982230680067974525
 Animator:
   serializedVersion: 5
@@ -235,6 +243,59 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8967529423278434926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8629302810944206394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &2421840707340025902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -408,6 +469,9 @@ MonoBehaviour:
   _pickupDistance: 0.85
   _pullSpeed: 11
   _logCount: 0
+  _logSlot: {fileID: 0}
+  _slotScale: 1.5
+  _slotTimer: 0.2
 --- !u!4 &6720309379976608960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}

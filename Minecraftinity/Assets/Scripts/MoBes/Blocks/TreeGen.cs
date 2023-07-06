@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -7,6 +9,11 @@ public class TreeGen : MonoBehaviour
 {
     [SerializeField] private Log _log;
     [SerializeField] private Leaf _leaf;
+    [SerializeField] private ParticleSystem _leavesParticlePrefab;
+
+    private List<Log> _logs;
+    private List<Leaf> _leaves;
+    private ParticleSystem _leavesParticle;
 
     public void Generate(WorldGen worldGen, bool isInEditor)
     {
@@ -50,9 +57,8 @@ public class TreeGen : MonoBehaviour
                     }
 
                     Vector3 localPos = new(x, y + 0.5f, z);
-                    Vector3 globalPos = transform.TransformPoint(localPos);
                     Collider[] hitColliders = new Collider[1];
-                    bool isOccupied = Physics.OverlapSphereNonAlloc(globalPos, 0.1f, hitColliders, Physics.AllLayers, QueryTriggerInteraction.Collide) > 0;
+                    bool isOccupied = Physics.OverlapSphereNonAlloc(transform.position + localPos, 0.1f, hitColliders, Physics.AllLayers, QueryTriggerInteraction.Collide) > 0;
 
                     if (!isLog && !isRandomlyRemoved && !isOccupied)
                     {
@@ -69,9 +75,8 @@ public class TreeGen : MonoBehaviour
         for (y = 0; y < height; y++)
         {
             Vector3 localPos = new(0, y + 0.5f, 0);
-            Vector3 globalPos = transform.TransformPoint(localPos);
             Collider[] hitColliders = new Collider[1];
-            bool isOccupied = Physics.OverlapSphereNonAlloc(globalPos, 0.1f, hitColliders, Physics.AllLayers, QueryTriggerInteraction.Collide) > 0;
+            bool isOccupied = Physics.OverlapSphereNonAlloc(transform.position + localPos, 0.1f, hitColliders, Physics.AllLayers, QueryTriggerInteraction.Collide) > 0;
 
             if (isOccupied && (hitColliders[0].attachedRigidbody != null) && hitColliders[0].attachedRigidbody.TryGetComponent(out Leaf _))
             {
@@ -108,5 +113,47 @@ public class TreeGen : MonoBehaviour
 #endif
 
         Destroy(go);
+    }
+
+    private void Start()
+    {
+        _logs = new List<Log>();
+        _leaves = new List<Leaf>();
+        GetComponentsInChildren(_logs);
+        GetComponentsInChildren(_leaves);
+
+        Vector3 pos = (_logs.Count * 0.5f + 1f) * Vector3.up;
+        _leavesParticle = Instantiate(_leavesParticlePrefab, transform);
+        _leavesParticle.transform.localPosition = pos;
+        IEnumerator leafCheck = LeafCheck();
+        StartCoroutine(leafCheck);
+    }
+
+    private IEnumerator LeafCheck()
+    {
+        while ((_leaves.Count > 0) && (_logs.Count > 0))
+        {
+            for (int i = _leaves.Count - 1; i >= 0; i--)
+            {
+                if (_leaves[i] == null)
+                {
+                    _leaves.RemoveAt(i);
+                }
+            }
+
+            for (int i = _logs.Count - 1; i >= 0; i--)
+            {
+                if (_logs[i] == null)
+                {
+                    _logs.RemoveAt(i);
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        var main = _leavesParticle.main;
+        main.loop = false;
+        Destroy(_leavesParticle.gameObject, 10f);
     }
 }

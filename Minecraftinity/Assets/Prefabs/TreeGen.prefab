@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _log: {fileID: 1016843721945030157, guid: 7cff09948c7a1254ebe472126ec1dec3, type: 3}
   _leaf: {fileID: -1615971242048226489, guid: d3d01c3185d0cdf4ca875f9164a440b9, type: 3}
+  _leavesParticlePrefab: {fileID: 198237499086154346, guid: 2412ff0fd2861c24898a16434345f6e2, type: 3}

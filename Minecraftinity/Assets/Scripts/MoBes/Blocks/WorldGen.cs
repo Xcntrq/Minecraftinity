@@ -89,6 +89,13 @@ public class WorldGen : MonoBehaviour
 
     private void Start()
     {
+        /*TreeGen[] trees = GetComponentsInChildren<TreeGen>(true);
+
+        foreach (TreeGen tree in trees)
+        {
+            tree.Generate(this, false);
+        }*/
+
         OnWorldGenerated?.Invoke();
     }
 }

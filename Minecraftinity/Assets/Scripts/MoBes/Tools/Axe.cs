@@ -1,8 +1,15 @@
+using Cinemachine;
 using UnityEngine;
 
 public class Axe : Tool
 {
     [SerializeField] private float _hitDistance;
+    [SerializeField] private CameraShaker _cameraShaker;
+    [SerializeField] private float _shakeAmp;
+    [SerializeField] private float _shakeFreq;
+    [SerializeField] private float _shakeTime;
+    [SerializeField] private float _shakeVelMin;
+    [SerializeField] private float _shakeVelMax;
 
     private Camera _mainCamera;
 
@@ -14,6 +21,13 @@ public class Axe : Tool
         if (isSomethingHit && (hitInfo.rigidbody != null) && hitInfo.rigidbody.TryGetComponent(out Block block))
         {
             block.GetChopped();
+            //_cameraShaker.ShakeVCam(_shakeAmp, _shakeFreq, _shakeTime);
+
+            Vector3 vel = Vector3.zero;
+            vel.x = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
+            vel.y = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
+            vel.z = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
+            GetComponent<CinemachineImpulseSource>().GenerateImpulseWithVelocity(vel);
         }
     }
 
@@ -24,7 +38,7 @@ public class Axe : Tool
 
     private void Update()
     {
-        GetComponent<Animator>().SetBool("IsSwinging", Input.GetMouseButton(0));
+        GetComponent<Animator>().SetBool("IsSwinging", Input.GetMouseButton(0) || Input.GetMouseButtonDown(0));
 
         bool w = Input.GetKey(KeyCode.W);
         bool a = Input.GetKey(KeyCode.A);

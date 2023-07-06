@@ -22,12 +22,14 @@ public class Log : MonoBehaviour
         Vector3 startScale = heldLog.transform.localScale;
         Vector3 endScale = placeholderLog.transform.localScale;
         float timer = 0f;
+        float lerp = 0f;
 
-        while (timer < 1f)
+        while (lerp < 1f)
         {
-            transform.localScale = Vector3.Lerp(startScale, endScale, timer / _timeToBuild);
-            Quaternion rot = Quaternion.Lerp(startRot, endRot, timer / _timeToBuild);
-            Vector3 pos = Vector3.Lerp(startPos, endPos, timer / _timeToBuild);
+            lerp = timer / _timeToBuild;
+            transform.localScale = Vector3.Lerp(startScale, endScale, lerp);
+            Quaternion rot = Quaternion.Lerp(startRot, endRot, lerp);
+            Vector3 pos = Vector3.Lerp(startPos, endPos, lerp);
             transform.SetPositionAndRotation(pos, rot);
             timer += Time.deltaTime;
 

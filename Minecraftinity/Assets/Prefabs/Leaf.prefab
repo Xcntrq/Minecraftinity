@@ -153,9 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _worldGen: {fileID: 0}
   _logRange: 3
-  _logCheckDelay: 5
-  _deathDealyMin: 3
-  _deathDealyMax: 12
+  _logCheckDelay: 1
+  _deathDealyMin: 2
+  _deathDealyMax: 8
   _nearbyLogs: []
 --- !u!54 &4265633511669632629
 Rigidbody:

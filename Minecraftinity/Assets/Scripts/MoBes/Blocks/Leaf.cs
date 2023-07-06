@@ -31,6 +31,23 @@ public class Leaf : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Collider[] hitColliders = new Collider[10];
+        int numColliders = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * 0.5f, 0.1f, hitColliders, Physics.AllLayers, QueryTriggerInteraction.Collide);
+
+        for (int i = 0; i < numColliders; i++)
+        {
+            Collider collider = hitColliders[i];
+            if ((collider.attachedRigidbody != null) && collider.attachedRigidbody.TryGetComponent(out Log _))
+            {
+                print("removing a leaf");
+                Destroy(gameObject);
+                break;
+            }
+        }
+    }
+
     private void WorldGen_OnWorldGenerated()
     {
         FindNearbyLogs();
