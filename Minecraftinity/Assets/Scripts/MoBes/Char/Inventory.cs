@@ -54,6 +54,8 @@ public class Inventory : MonoBehaviour
                 StopCoroutine(_scaleSlot);
                 _scaleSlot = ScaleSlot();
                 StartCoroutine(_scaleSlot);
+
+                GetComponent<SoundPlayer>().PlayRandomSound();
             }
         }
     }

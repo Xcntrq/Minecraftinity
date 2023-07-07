@@ -74,5 +74,10 @@ public class ToolSelector : MonoBehaviour
         _activeImage.sprite = _slotInactive;
         _activeImage = image;
         _activeImage.sprite = _slotActive;
+
+        if (keyCode == KeyCode.Alpha1)
+        {
+            GetComponent<SoundPlayer>().PlayRandomSound();
+        }
     }
 }

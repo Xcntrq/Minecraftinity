@@ -11,6 +11,8 @@ public class Axe : Tool
     [SerializeField] private float _shakeVelMin;
     [SerializeField] private float _shakeVelMax;
     [SerializeField] private ParticleSystem _particleHit;
+    [SerializeField] private SoundPlayer _missSounds;
+    [SerializeField] private SoundPlayer _hitSounds;
 
     private Camera _mainCamera;
 
@@ -30,11 +32,17 @@ public class Axe : Tool
             ps.transform.up = offset;
             Destroy(ps.gameObject, 5f);
 
+            _hitSounds.PlayRandomSound();
+
             Vector3 vel = Vector3.zero;
             vel.x = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
             vel.y = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
             vel.z = Random.Range(0, 2) == 0 ? Random.Range(_shakeVelMin, _shakeVelMax) : -Random.Range(_shakeVelMin, _shakeVelMax);
             GetComponent<CinemachineImpulseSource>().GenerateImpulseWithVelocity(vel);
+        }
+        else
+        {
+            _missSounds.PlayRandomSound();
         }
     }
 

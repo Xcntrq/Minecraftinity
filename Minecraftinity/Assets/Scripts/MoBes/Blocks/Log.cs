@@ -42,6 +42,8 @@ public class Log : MonoBehaviour
         ps.transform.up = transform.up;
         Destroy(ps.gameObject, 5f);
 
+        GetComponent<SoundPlayer>().PlayRandomSound();
+
         Destroy(placeholderLog.gameObject);
         _mainCollider.enabled = true;
     }
