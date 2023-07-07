@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -32,7 +31,6 @@ public class CursorBeh : MonoBehaviour
         public int Right;
         public int Bottom;
     }
-#endif
 
     public void Start()
     {
@@ -43,4 +41,5 @@ public class CursorBeh : MonoBehaviour
         cursorLimits.Bottom = Screen.height - 1;
         ClipCursor(ref cursorLimits);
     }
+#endif
 }
